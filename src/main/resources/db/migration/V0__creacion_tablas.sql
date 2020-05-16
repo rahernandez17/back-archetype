@@ -1,22 +1,22 @@
 CREATE TABLE recibo (
     re_num_pedido  SERIAL NOT NULL,
     re_referencia CHARACTER VARYING(100) NOT NULL,
-    re_codigo_interno NUMBER NOT NULL,
+    re_codigo_interno INTEGER NOT NULL,
     re_producto CHARACTER VARYING(100) NOT NULL,
-    re_cantidad NUMBER NOT NULL,
-    re_valor NUMBER NOT NULL,
-    re_valor_iva NUMBER NOT NULL,
-    re_total NUMBER NOT NULL,
-    re_total_iva NUMBER NOT NULL,
-    re_total_descuento NUMBER NOT NULL,
-    re_total_pagar NUMBER NOT NULL,
+    re_cantidad INTEGER NOT NULL,
+    re_valor INTEGER NOT NULL,
+    re_valor_iva INTEGER NOT NULL,
+    re_total INTEGER NOT NULL,
+    re_total_iva INTEGER NOT NULL,
+    re_total_descuento INTEGER NOT NULL,
+    re_total_pagar INTEGER NOT NULL,
     re_estado_academusoft CHARACTER VARYING(50),
     re_estado CHARACTER VARYING(30),
     re_url CHARACTER VARYING(250),
     re_fecha_creacion CHARACTER VARYING(50),
     re_fecha_limite_pago CHARACTER VARYING(50) NOT NULL,
     re_fecha_pago CHARACTER VARYING(50),
-    re_solicitud_id NUMBER NOT NULL,
+    re_solicitud_id INTEGER NOT NULL,
     PRIMARY KEY (re_num_pedido)
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE certificado (
     ce_codigo CHARACTER VARYING(50) NOT NULL,
     ce_nombre CHARACTER VARYING(100) NOT NULL,
     ce_estado BOOLEAN NOT NULL,
-    ce_tipo_certificado_id NUMBER NOT NULL,
+    ce_tipo_certificado_id INTEGER NOT NULL,
     PRIMARY KEY (ce_id)
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE solicitud (
     so_id  SERIAL NOT NULL,
     so_fecha CHARACTER VARYING (100) NOT NULL,
     so_estado BOOLEAN NOT NULL,
-    so_usuario_id NUMBER NOT NULL,
+    so_usuario_id INTEGER NOT NULL,
     PRIMARY KEY (so_id)
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE usuario (
     usu_token_notify CHARACTER VARYING(255) NOT NULL,
     usu_estado BOOLEAN NOT NULL,
     usu_tipo_dispositivo CHARACTER VARYING(100) NOT NULL,
-    usu_pege_id NUMBER NOT NULL,
+    usu_pege_id INTEGER NOT NULL,
     PRIMARY KEY (usu_id)
 );
 
@@ -73,8 +73,8 @@ CREATE TABLE certificado_generado (
     cg_url CHARACTER VARYING(100) NOT NULL,
     cg_programa CHARACTER VARYING(50) NOT NULL,
     cg_periodo CHARACTER VARYING(10) NOT NULL,
-    cg_certificado_id NUMBER NOT NULL,
-    cg_recibo_id NUMBER NOT NULL,
+    cg_certificado_id INTEGER NOT NULL,
+    cg_recibo_id INTEGER NOT NULL,
     PRIMARY KEY (cg_id)
 );
 
