@@ -45,10 +45,16 @@ public class TypeCertificateController {
             @ApiResponse(code = 404, message = "The table doesn't exist"),
             @ApiResponse(code = 401, message = "Expired or invalid JWT token")})
     public ResponseEntity<SimpleResponse>  saveTypeCertificate(@RequestBody TypeCerticateRequest typeCerticateRequest) {
-        TypeCertificate typeCertificate = modelMapper.map(typeCerticateRequest, TypeCertificate.class);
-        TypeCertificate result = typeCetificateService.saveTypeCertificate(typeCertificate);
-        SimpleResponse response = SimpleResponse.builder().code(200).message("Se ha creado correctamente").value(result).build();
+        SimpleResponse response = null;
+        try{
+            TypeCertificate typeCertificate = modelMapper.map(typeCerticateRequest, TypeCertificate.class);
+            TypeCertificate result = typeCetificateService.saveTypeCertificate(typeCertificate);
+            response = SimpleResponse.builder().code(200).message("Se ha creado correctamente").value(result).build();
+        }catch (Exception e) {
+
+        }
         return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @PutMapping("/update")
