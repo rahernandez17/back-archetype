@@ -21,8 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.awt.image.SampleModel;
 import java.util.List;
 
+/**
+ * Controlador de tipo de certificado 
+ *
+ * @author <a href="mailto:stivencastroarias2@gmail.com">
+ * date: 15/05/2020
+ * SP-0
+ * */
 @RestController
 @RequestMapping("/type/certificate")
 @Api(tags = "Type Certificate")
@@ -37,6 +45,14 @@ public class TypeCertificateController {
         this.typeCetificateService = typeCetificateService;
     }
 
+    /**
+     * Metodo encargado de guardar el tipo de certificado
+     *
+     * @author <a href="mailto:stivencastroarias2@gmail.com">
+     * @return SimpleResponse {@link ResponseEntity}
+     * date: 15/05/2020
+     * SP-0
+     * */
     @PostMapping("/insert")
     @ApiOperation(value = "Save Type Certificate ", response = TypeCertificate.class)
     @ApiResponses(value = {
@@ -57,6 +73,14 @@ public class TypeCertificateController {
 
     }
 
+    /**
+     * Metodo encargado de actualizar el tipo de certificado
+     *
+     * @author <a href="mailto:stivencastroarias2@gmail.com">
+     * @return SimpleResponse {@link ResponseEntity}
+     * date: 15/05/2020
+     * SP-0
+     * */
     @PutMapping("/update")
     @ApiOperation(value = "Update Type Certificate ", response = TypeCertificate.class)
     @ApiResponses(value = {
@@ -64,12 +88,27 @@ public class TypeCertificateController {
             @ApiResponse(code = 401, message = "Access denied"),
             @ApiResponse(code = 404, message = "The table doesn't exist"),
             @ApiResponse(code = 401, message = "Expired or invalid JWT token")})
-    public TypeCertificate updateTypeCertificate(@RequestBody TypeCerticateRequest typeCerticateRequest) {
-        TypeCertificate typeCertificate = modelMapper.map(typeCerticateRequest, TypeCertificate.class);
+    public ResponseEntity<SimpleResponse> updateTypeCertificate(@RequestBody TypeCerticateRequest typeCerticateRequest) {
+        SimpleResponse response =  null;
+        try {
+            TypeCertificate typeCertificate = modelMapper.map(typeCerticateRequest, TypeCertificate.class);
+            TypeCertificate result = typeCetificateService.updateTypeCertificate(typeCertificate);
+            response = SimpleResponse.builder().code(200).message("Se han actualizado los datos con exito").value(result).build();
+        }catch (Exception e){
 
-        return typeCetificateService.updateTypeCertificate(typeCertificate);
+            }
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
+    /**
+     * Metodo encargado de obtener el modelo de tipo de certificado
+     *
+     * @author <a href="mailto:stivencastroarias2@gmail.com">
+     * @return SimpleResponse {@link ResponseEntity}
+     * date: 15/05/2020
+     * SP-0
+     * */
     @GetMapping("/all")
     @ApiOperation(value = "Get All Type Certificate ", response = TypeCertificate.class)
     @ApiResponses(value = {
@@ -77,10 +116,21 @@ public class TypeCertificateController {
             @ApiResponse(code = 401, message = "Access denied"),
             @ApiResponse(code = 404, message = "The table doesn't exist"),
             @ApiResponse(code = 401, message = "Expired or invalid JWT token")})
-    public List<TypeCertificate> getAllTypeCertificate() {
-        return typeCetificateService.getAllTypeCertificate();
+    public ResponseEntity<SimpleResponse>  getAllTypeCertificate() {
+        List<TypeCertificate> result = typeCetificateService.getAllTypeCertificate();
+        SimpleResponse response = SimpleResponse.builder().code(200).message("Se obtuvieron los resultados esperados").value(result).build();
+
+        return new ResponseEntity<>(response,HttpStatus.OK) ;
     }
 
+    /**
+     * Metodo encargado de Borrar el modelo de tipo de certificado por id
+     *
+     * @author <a href="mailto:stivencastroarias2@gmail.com">
+     * @param id id del usuario que va a ser eliminado
+     * date: 15/05/2020
+     * SP-0
+     * */
     @DeleteMapping("/delete/id")
     @ApiOperation(value = "Delete By Id Type Certificate ", response = TypeCertificate.class)
     @ApiResponses(value = {
@@ -88,7 +138,7 @@ public class TypeCertificateController {
             @ApiResponse(code = 401, message = "Access denied"),
             @ApiResponse(code = 404, message = "The table doesn't exist"),
             @ApiResponse(code = 401, message = "Expired or invalid JWT token")})
-    public void delecteTypeCertificateById(@RequestParam(name = "ud") Long id) {
+    public void  delecteTypeCertificateById(@RequestParam(name = "id") Long id) {
         typeCetificateService.delectTypeCertificate(id);
     }
 }

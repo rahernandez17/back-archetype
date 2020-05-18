@@ -12,7 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * @author Stiven Castro Arias
+ * ModeloDTO de tipo de certifacado
+ *
+ * @author <a href="mailto:stivencastroarias2@gmail.com">
  * date: 15/05/2020
  * SP-0
  * */

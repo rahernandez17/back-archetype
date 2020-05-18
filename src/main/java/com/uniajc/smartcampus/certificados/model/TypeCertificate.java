@@ -1,6 +1,5 @@
 package com.uniajc.smartcampus.certificados.model;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -16,6 +15,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Modelo de tipo de certificado
+ *
+ * @author <a href="mailto:stivencastroarias2@gmail.com"> Stiven Castrp</a>
+ * @date 15/05/2020
+ * @HU_CU_REQ SP0
+ */
 @Getter
 @Setter
 @Builder
@@ -33,21 +39,27 @@ public class TypeCertificate {
     private  Long tcId;
 
     @Column(name = "tc_nombre")
+    @ApiModelProperty(notes = "Nombre del tipo de certificado", required = true)
     private String tcName;
 
     @Column(name = "tc_estado")
+    @ApiModelProperty(notes = "Estado del tipo de certificado", required = true)
     private Boolean tcState;
 
     @Column(name = "tc_responsable")
+    @ApiModelProperty(notes = "Responsable de generar el tipo de certificado", required = true)
     private String tcResponsable;
 
     @Column(name = "tc_cargo_responsable")
+    @ApiModelProperty(notes= "Cargo del responsable de generar el tipo de certificado ", required = true)
     private String tcJob;
 
     @Column(name = "tc_usuario_firma")
+    @ApiModelProperty(notes = "Firma del usuario", required = true)
     private String tcUserFirm;
 
     @Column(name = "tc_pass_firma")
+    @ApiModelProperty(notes = "Contraseña de la firma",required = true)
     private String tcPassFirm;
 
     @Column(name = "tc_issuer")
